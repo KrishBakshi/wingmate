@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!--
+    Wingmate mark: two chevrons in formation — the lead and the wing flying off it.
+    Doubles as a terminal prompt, which matches this repo's CLI-first workflow.
+    Single accent colour (#d7263d) on a transparent ground, so it reads on light
+    and dark backgrounds alike, including both GitHub themes.
+    Strokes are heavy and the mark runs edge to edge, because thin geometry turns
+    to mush at 16px.
+
+    This is the same file the site serves as its favicon. Keep the two in sync:
+    identical geometry, identical accent colour.
+  -->
+  <g fill="none" stroke="#d7263d" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter">
+    <path d="M14 5.5 24.5 16 14 26.5" />
+    <path d="M5 10.5 10.5 16 5 21.5" />
+  </g>
+</svg>
