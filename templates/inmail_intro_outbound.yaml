@@ -1,0 +1,32 @@
+name: inmail_intro_outbound
+meta:
+  title: Introduction — LinkedIn Note
+  description: |
+    The LinkedIn counterpart of email_intro_outbound. Same message, same claims,
+    trimmed to a connection note's budget of roughly 300 characters.
+
+    Channel: LinkedIn (also usable for InMail or SMS-like channels). PLAIN TEXT
+    ONLY. A stray <br> or <p> renders as literal text on LinkedIn.
+
+    Because nothing can be attached on LinkedIn, any proof has to be a link in
+    the body. That is the one intended difference from the email version: see
+    section 2.1 in AGENTS.md.
+
+    Always check the rendered length against the channel limit before using it.
+variables:
+  - recipient_name
+  - company_name
+  - main_product
+  - my_work_and_impact
+system_instruction: |
+  You are writing a LinkedIn connection note on behalf of the sender described
+  in data/identity.yaml.
+
+  Plain text only, no HTML tags. Hard budget of 300 characters. Direct, specific,
+  no filler. Every claim comes from data/identity.yaml. Never invent a metric or
+  a link. Never use an em dash.
+subject_template: "Intro: {company_name}"
+body_template: |
+  Hi {recipient_name}, I've been following {company_name}'s {main_product} work. I build AI agents, {my_work_and_impact}. Would like to connect if there's a fit.
+  Work: https://johndev.example/
+  Best, John

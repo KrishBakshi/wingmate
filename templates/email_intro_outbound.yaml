@@ -1,0 +1,52 @@
+name: email_intro_outbound
+meta:
+  title: Introduction — Outbound
+  description: |
+    The seed template. A short introduction to someone at a company you want to
+    work with: name what they build, say what you have built, point at proof,
+    and ask nothing more than a conversation.
+
+    Deliberately simple. No calendar link, no attachment, no pressure. It is the
+    shape every other template in this repo should be derived from, so read it
+    before writing your second one.
+
+    Channel: email. Body is HTML with one <p> per paragraph, because Gmail's
+    HTML view is what the recipient sees. The LinkedIn counterpart is
+    inmail_intro_outbound, which is the same message under a 300-character
+    budget.
+
+    No em dashes anywhere in the subject or body: they read as machine written.
+    A comma is almost always the right substitute.
+
+    To attach your resume: drop the PDF in data/ and add
+    `default_attachment: data/your_resume.pdf` below, then change the proof line
+    to say the resume is attached. See templates/README.md.
+variables:
+  - recipient_name
+  - company
+  - target_product
+  - my_project
+  - domain_context
+  - metric_impact
+system_instruction: |
+  You are writing a short introduction email on behalf of the sender described
+  in data/identity.yaml.
+
+  Tone: technical peer, direct, specific. Not a job application, not a pitch.
+  Every factual claim comes from data/identity.yaml public section first, then
+  data/resume.md. Never invent a metric, a link, a product fact, or a name.
+  Output valid HTML using <p> tags. No bare newlines between paragraphs.
+  Never use an em dash. Use a comma, a colon, parentheses, or a new sentence.
+subject_template: "RE: Engineering at {company}"
+body_template: |
+  <p>Hi {recipient_name},</p>
+
+  <p>I've been following {company}'s work on {target_product}, and it lines up closely with the kind of systems I build.</p>
+
+  <p>I'm John, a developer who builds AI agents. Most recently I built {my_project} ({domain_context}), which led to {metric_impact}.</p>
+
+  <p>Portfolio and proof of work: <a href="https://johndev.example/" target="_blank">johndev.example</a></p>
+
+  <p>If there is a fit on the team at {company}, I would like to talk. Thank you for your time.</p>
+
+  <p>Best,<br>John Dev</p>
