@@ -1,0 +1,27 @@
+# Secrets and OAuth artifacts. Never commit these.
+.env
+*credentials.json
+*token.json
+
+# Python
+*.egg-info/
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Operational output. Everything an agent produces at runtime lands here:
+# scraped pages, prospect lists, research JSON, batch results, draft logs.
+# The directory itself is tracked (via .gitkeep) so a fresh clone shows the
+# layout documented in AGENTS.md section 7; nothing inside it ever is.
+runs/*
+!runs/.gitkeep
+
+# Long-form research artifacts, if you keep any.
+outputs/
+
+# Skill scratchpads are living memory, not committed artifacts.
+SCRATCHPAD.md
+
+# OS
+.DS_Store

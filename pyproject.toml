@@ -1,0 +1,41 @@
+[project]
+name = "wingmate"
+version = "0.1.0"
+description = "Template-driven outbound email system with Gmail integration, driven by a coding agent"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "pyyaml>=6.0.2",
+  "pydantic>=2.11.1",
+  "python-dotenv>=1.0.1",
+  "google-api-python-client>=2.165.0",
+  "google-auth-oauthlib>=1.2.1",
+  "openpyxl>=3.1.5",
+  "pandas>=2.2.3",
+]
+
+# Tooling used by the skills, not imported by src/. Declared as a dependency
+# group so `uv sync` installs it by default (uv syncs `dev` unless told
+# otherwise) instead of it living in .venv undeclared and getting pruned.
+# scrapling drives the layer-1 scrape in CLAUDE.md §8 via its own CLI; the
+# [all] extra also brings the MCP server, the fetchers (playwright/patchright/
+# curl-cffi) and the IPython shell. Browser binaries are NOT installed by
+# uv sync -- run `uv run scrapling install` once after a fresh sync.
+[dependency-groups]
+dev = [
+  "scrapling[all]>=0.4.9",
+  # [tool.pytest.ini_options] below points pytest at guardrails/, so the runner
+  # it configures has to actually be installed.
+  "pytest>=8.3.0",
+]
+
+[tool.uv]
+package = false
+
+# The guardrails/ directory holds outbound-safety checks, not a unit-test suite.
+# Files and functions are named check_* rather than test_*, so point pytest at
+# that convention for the runs that use it.
+[tool.pytest.ini_options]
+testpaths = ["guardrails"]
+python_files = ["check_*.py"]
+python_functions = ["check_*"]
