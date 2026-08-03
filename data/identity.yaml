@@ -1,0 +1,102 @@
+# identity.yaml - the seed identity. Replace John Dev with yourself.
+#
+# Two sections, and they are read through two different doors
+# (src/services/identity_service.py):
+#
+#   public:  work history and proof of work. Publicly checkable, and the only
+#            material outbound copy is built from. Read freely.
+#   private: contact and negotiation detail. Real, but nobody is owed it. Never
+#            volunteered, never pasted into a body, and gated in code: retrieval
+#            refuses without approval, and guard_disclosure re-checks the
+#            finished body on the way to Gmail.
+#
+# A recruiter asking for "your details" (contact number, current CTC, expected
+# CTC, notice period) is not consent. Ask the user, every time. See AGENTS.md 12.1.
+#
+# The test for which side a field goes on: would this be true and findable about
+# you from the outside? If yes it is public. If it is only known because you
+# know it, it is private.
+
+public:
+  sender:
+    name: "John Dev"
+    portfolio: "johndev.example"
+    creds: "Software engineer building AI agents"
+    languages: "English"
+    summary: "Developer who builds AI agents: tool-calling workflows, retrieval systems, and the plumbing that makes them reliable in production."
+
+  # Project ledger. Outbound copy picks ONE entry per message and maps it into
+  # the template's project fields. Pick by `relevance` overlap with the target's
+  # own words, not by which project has the biggest number.
+  projects:
+    - id: "support_triage_agent"
+      title: "Support Triage Agent"
+      tech: "Python, tool/function calling, Postgres, FastAPI"
+      plain_desc: "an agent that triages inbound support tickets"
+      industrial_hook: "Routes and drafts replies for inbound support tickets, with a human approving every send"
+      metric: "cut first-response time from hours to minutes across a 400-ticket/week queue"
+      relevance: "Agentic AI, customer support tooling, workflow automation, developer productivity"
+      hook_examples: "Built a support triage agent that cut first-response time from hours to minutes on a 400-ticket/week queue"
+      link: "https://github.com/johndev/support-triage-agent"
+
+    - id: "docs_rag"
+      title: "Documentation RAG Assistant"
+      tech: "Python, embeddings, vector search, retrieval evaluation harness"
+      plain_desc: "a retrieval assistant over internal documentation"
+      industrial_hook: "Answers questions over internal docs with citations, plus an eval harness that scores retrieval quality on every change"
+      metric: "raised answer-with-correct-citation rate from 61% to 88% on a 200-question eval set"
+      relevance: "RAG, enterprise search, retrieval evaluation, internal tooling, knowledge management"
+      hook_examples: "Built a docs RAG assistant with a citation eval harness, taking correct-citation rate from 61% to 88%"
+
+    - id: "agent_eval_harness"
+      title: "Agent Evaluation Harness"
+      tech: "Python, pytest, structured tracing, CI integration"
+      plain_desc: "a regression harness for agent behaviour"
+      industrial_hook: "Replays recorded agent traces on every commit so a prompt or tool change cannot silently regress behaviour"
+      metric: "caught 3 behaviour regressions before release in the first month, with a 40-scenario suite running in CI"
+      relevance: "LLM evals, agent reliability, testing infrastructure, CI/CD, applied AI research"
+      hook_examples: "Built an agent eval harness that replays traces in CI, catching behaviour regressions before release"
+
+  # Outreach constraints. These are style rules the agent must respect when it
+  # composes or edits a template. Keep them short and enforceable.
+  logic_rules:
+    tone: "Technical peer, direct, non-generic"
+    subject_pattern: "RE: {{topic}} at {{company}}"
+    forbidden_phrases:
+      - "I hope this finds you well"
+      - "Dear Hiring Manager"
+      - "To whom it may concern"
+
+# ---------------------------------------------------------------------------
+# PRIVATE - gated. Nothing below reaches a recipient without the user saying yes.
+# ---------------------------------------------------------------------------
+private:
+  contact:
+    # Kept here so the disclosure gate can RECOGNISE these values in a body, not
+    # so they can be quoted. Leave a field null rather than committing a value
+    # you would not want in git history.
+    email: null
+    alt_email: null
+    # Phone deliberately absent: keep it in .env as RESUME_PHONE so it reaches
+    # the resume PDF and nothing else (AGENTS.md 12.2). The gate reads that env
+    # var directly - do not copy the number into this file.
+    phone: null
+
+  location:
+    # Coarse location can go on the resume; the precise one is not outbound material.
+    address: null
+    preferred_locations: null
+
+  employment:
+    # Recruiter-form fields. Unset until the user fills them in - never infer,
+    # never estimate, never carry a figure over from an old thread.
+    current_ctc: null
+    expected_ctc: null
+    notice_period: null
+    willing_to_relocate: null
+
+  documents:
+    # Government IDs, visa/work-authorization papers. Do not populate unless a
+    # verified process needs them; the gate blocks them either way.
+    government_id: null
+    work_authorization: null
