@@ -2,7 +2,20 @@
 
 # Wingmate
 
-A template-driven outbound email system you drive by talking to a coding agent.
+An open-source, local-first **research-led outbound agent** you drive by talking
+to a coding agent.
+
+> Relevance is a research problem, not a writing problem.
+
+It finds a public prospect signal, verifies it (source, date, exact fact kept),
+maps it against proof drawn from your own project ledger, and drafts outreach
+through a template that encodes how you write. That mapped connection is a
+**value hypothesis**, never a claimed pain point: Wingmate never asserts more
+about a prospect than a source states.
+
+```
+find prospects → verify signals → identify credible fit → draft in your voice → review and send
+```
 
 You describe who you are once, in `data/`. You describe what you want to say
 once, in `templates/`. After that, "draft an intro to the founder of Acme about
@@ -14,6 +27,9 @@ inventing.
 It works with **any agent harness**: Claude Code, Codex, Cursor, or anything else
 that reads `AGENTS.md`. There is no vendor lock-in in the design, and the CLI
 works fine on its own if you would rather type.
+
+Wingmate is one focused part of outbound GTM, not a full GTM platform: it does
+not manage a CRM, run a sequencer, or send anything on its own.
 
 ## Why it is built this way
 
