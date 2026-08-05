@@ -44,11 +44,14 @@ by the same move, which is refusing to let the model author the message.
   and links, with a public section that outbound is built from and a private
   section that it is not. The agent is instructed to read it before composing and
   to never claim anything that is not in it.
-- **Two gates enforce the dangerous parts in code, not in a prompt.** A body that
-  does not reproduce a template is refused at `create_draft`, not just at `send`.
-  A body containing private data (phone, CTC, notice period, government IDs) is
-  refused too. Both fail closed, both sit inside the service so an inline script
-  cannot route around them, and both are pinned by checks in `guardrails/`.
+- **Drafts, not sends.** `draft` is the default path and the only thing batch
+  runs perform. Sending is a separate command with a required recipient, so
+  nothing leaves without a person choosing it.
+- **The template gate.** Before any draft or send, the body is scored against
+  the template it claims to use, and a body containing private data (phone,
+  CTC, notice period, government IDs) is refused too. Both checks fail closed,
+  both sit inside the service so an inline script cannot route around them, and
+  both are pinned by checks in `guardrails/`.
 - **It learns.** Your edits to a draft are a signal about your voice, and the
   agent is instructed to fold them back into the template, the ledger, or its own
   standing instructions rather than making you say them again.
